@@ -1,12 +1,23 @@
 import { Socket } from 'socket.io'
 import { createClient } from '@/lib/supabase/server'
-import { createLogger } from '@/lib/logs/console-logger'
-import { nanoid } from 'nanoid'
-import { ExtendedError } from 'socket.io/dist/namespace'
+import { createLogger } from '@/lib/logs/console-logger' // Winston-based logger for consistent, structured logging
+import { nanoid } from 'nanoid' // Secure, URL-friendly unique ID generator
 
-const logger = createLogger('SocketAuth')
+// Use local ExtendedError definition to avoid import error and ensure type safety
+/**
+ * Custom error type for socket authentication middleware.
+ * Mirrors the structure of socket.io's ExtendedError for compatibility.
+ * @typedef {Object} ExtendedError
+ * @property {string} [message] - Optional error message
+ * @property {number} [code] - Optional error code
+ * @property {any} [data] - Optional additional error data
+ */
+export interface ExtendedError extends Error {
+  code?: number
+  data?: any
+}
 
-// Extend Socket interface to include user data
+const logger = createLogger('SocketAuth') // Logger instance for socket authentication events
 declare module 'socket.io' {
   interface Socket {
     userId: string
