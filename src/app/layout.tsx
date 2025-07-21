@@ -4,6 +4,7 @@ import { ColorMode } from '@xyflow/react';
 
 import { AppStoreProvider } from '@/store/index';
 import { defaultState } from '@/store/app-store';
+import { AuthProvider } from '@/contexts/auth-context';
 
 import './globals.css';
 
@@ -37,7 +38,9 @@ export default async function RootLayout({
   return (
     <AppStoreProvider initialState={{ ...defaultState, colorMode: theme }}>
       <html lang="en" className={theme}>
-        <body>{children}</body>
+        <body>
+          <AuthProvider>{children}</AuthProvider>
+        </body>
       </html>
     </AppStoreProvider>
   );
