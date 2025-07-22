@@ -1,7 +1,7 @@
 import { BlockPathCalculator } from '@/lib/block-path-calculator'
-import { createLogger } from '@/lib/logs/console-logger'
-import type { BlockOutput } from '@/blocks/types'
-import { BlockType } from '@/executor/consts'
+import { createLogger } from '../lib/logs/console-logger'
+import type { BlockOutput } from '../blocks/types'
+import { BlockType } from './consts'
 import {
   AgentBlockHandler,
   ApiBlockHandler,

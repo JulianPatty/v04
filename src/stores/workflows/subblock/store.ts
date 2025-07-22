@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { SubBlockConfig } from '@/blocks/types'
-import { useEnvironmentStore } from '@/stores/settings/enviorment/store'
+import { useEnvironmentStore } from '@/stores/settings/environment/store'
 import { useGeneralStore } from '@/stores/settings/general/store'
 import { useWorkflowRegistry } from '../registry/store'
 // Removed workflowSync import - Socket.IO handles real-time sync
