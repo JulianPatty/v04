@@ -279,10 +279,10 @@ export default function TermsOfService() {
                   You have the right to opt out of the provisions of this Arbitration Agreement by
                   sending a timely written notice of your decision to opt out to:{' '}
                   <Link
-                    href='mailto:legal@simstudio.ai'
+                    href='mailto:legal@Setn.ai'
                     className='text-[#B5A1D4] hover:text-[#701ffc]'
                   >
-                    legal@simstudio.ai{' '}
+                    legal@Setn.ai{' '}
                   </Link>
                   within 30 days after first becoming subject to this Arbitration Agreement.
                 </p>
@@ -333,10 +333,10 @@ export default function TermsOfService() {
                 <p>
                   Our Copyright Agent can be reached at:{' '}
                   <Link
-                    href='mailto:copyright@simstudio.ai'
+                    href='mailto:copyright@Setn.ai'
                     className='text-[#B5A1D4] hover:text-[#701ffc]'
                   >
-                    copyright@simstudio.ai
+                    copyright@Setn.ai
                   </Link>
                 </p>
               </section>
@@ -346,10 +346,10 @@ export default function TermsOfService() {
                 <p>
                   If you have any questions about these Terms, please contact us at:{' '}
                   <Link
-                    href='mailto:legal@simstudio.ai'
+                    href='mailto:legal@Setn.ai'
                     className='text-[#B5A1D4] hover:text-[#701ffc]'
                   >
-                    legal@simstudio.ai
+                    legal@Setn.ai
                   </Link>
                 </p>
               </section>

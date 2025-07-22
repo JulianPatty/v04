@@ -30,13 +30,20 @@ export type TelemetryStatus = {
 const TELEMETRY_STATUS_KEY = 'simstudio-telemetry-status'
 
 let telemetryConfig = {
-  endpoint: env.TELEMETRY_ENDPOINT || 'https://telemetry.simstudio.ai/v1/traces',
+  endpoint: env.TELEMETRY_ENDPOINT || 'https://telemetry.Setn.ai/v1/traces',
   serviceName: 'sim-studio',
   serviceVersion: '0.1.0',
 }
 
-if (typeof window !== 'undefined' && (window as any).__SIM_STUDIO_TELEMETRY_CONFIG) {
-  telemetryConfig = { ...telemetryConfig, ...(window as any).__SIM_STUDIO_TELEMETRY_CONFIG }
+// Define the telemetry config type on the window object
+declare global {
+  interface Window {
+    __SIM_STUDIO_TELEMETRY_CONFIG?: Partial<TelemetryConfig>
+  }
+}
+
+if (typeof window !== 'undefined' && window.__SIM_STUDIO_TELEMETRY_CONFIG) {
+  telemetryConfig = { ...telemetryConfig, ...window.__SIM_STUDIO_TELEMETRY_CONFIG }
 }
 
 let telemetryInitialized = false
@@ -136,7 +143,7 @@ function initializeClientTelemetry(): void {
 
   try {
     const clientSideEnabled =
-      (window as any).__SIM_STUDIO_TELEMETRY_CONFIG?.clientSide?.enabled !== false
+      window.__SIM_STUDIO_TELEMETRY_CONFIG?.clientSide?.enabled !== false
 
     if (!clientSideEnabled) {
       logger.info('Client-side telemetry disabled in configuration')

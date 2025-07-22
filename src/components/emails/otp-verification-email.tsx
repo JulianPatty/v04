@@ -21,7 +21,7 @@ interface OTPVerificationEmailProps {
   chatTitle?: string
 }
 
-const baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai'
+const baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://Setn.ai'
 
 const getSubjectByType = (type: string, chatTitle?: string) => {
   switch (type) {

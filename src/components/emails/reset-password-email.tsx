@@ -22,7 +22,7 @@ interface ResetPasswordEmailProps {
   updatedDate?: Date
 }
 
-const baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai'
+const baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://Setn.ai'
 
 export const ResetPasswordEmail = ({
   username = '',

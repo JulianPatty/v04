@@ -43,19 +43,20 @@ export const useGeneralStore = create<GeneralStore>()(
           stateKey: keyof General
         ) => {
           // Prevent multiple simultaneous updates
-          if ((get() as any)[loadingKey]) return
+          const state = get()
+          if (state[loadingKey]) return
 
-          const originalValue = (get() as any)[stateKey]
+          const originalValue = state[stateKey]
 
           // Optimistic update
-          set({ [stateKey]: value, [loadingKey]: true } as any)
+          set({ [stateKey]: value, [loadingKey]: true } as Partial<General>)
 
           try {
             await get().updateSetting(key, value)
-            set({ [loadingKey]: false } as any)
+            set({ [loadingKey]: false } as Partial<General>)
           } catch (error) {
             // Rollback on error
-            set({ [stateKey]: originalValue, [loadingKey]: false } as any)
+            set({ [stateKey]: originalValue, [loadingKey]: false } as Partial<General>)
             logger.error(`Failed to update ${String(key)}, rolled back:`, error)
           }
         }
@@ -137,7 +138,7 @@ export const useGeneralStore = create<GeneralStore>()(
             if (
               typeof window !== 'undefined' &&
               (window.location.pathname.startsWith('/chat/') ||
-                (window.location.hostname !== 'simstudio.ai' &&
+                (window.location.hostname !== 'Setn.ai' &&
                   window.location.hostname !== 'localhost' &&
                   window.location.hostname !== '127.0.0.1' &&
                   !window.location.hostname.startsWith('www.')))
@@ -190,7 +191,7 @@ export const useGeneralStore = create<GeneralStore>()(
             if (
               typeof window !== 'undefined' &&
               (window.location.pathname.startsWith('/chat/') ||
-                (window.location.hostname !== 'simstudio.ai' &&
+                (window.location.hostname !== 'Setn.ai' &&
                   window.location.hostname !== 'localhost' &&
                   window.location.hostname !== '127.0.0.1' &&
                   !window.location.hostname.startsWith('www.')))

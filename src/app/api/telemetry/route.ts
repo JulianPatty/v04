@@ -19,16 +19,18 @@ const DEFAULT_TIMEOUT = 5000 // 5 seconds timeout
 /**
  * Validates telemetry data to ensure it doesn't contain sensitive information
  */
-function validateTelemetryData(data: any): boolean {
+function validateTelemetryData(data: unknown): boolean {
   if (!data || typeof data !== 'object') {
     return false
   }
 
-  if (!data.category || !data.action) {
+  const telemetryData = data as Record<string, unknown>
+  
+  if (!telemetryData.category || !telemetryData.action) {
     return false
   }
 
-  if (!ALLOWED_CATEGORIES.includes(data.category)) {
+  if (!ALLOWED_CATEGORIES.includes(telemetryData.category as string)) {
     return false
   }
 
@@ -41,7 +43,7 @@ function validateTelemetryData(data: any): boolean {
 /**
  * Safely converts a value to string, handling undefined and null values
  */
-function safeStringValue(value: any): string {
+function safeStringValue(value: unknown): string {
   if (value === undefined || value === null) {
     return ''
   }
@@ -57,7 +59,7 @@ function safeStringValue(value: any): string {
  * Creates a safe attribute object for OpenTelemetry
  */
 function createSafeAttributes(
-  data: Record<string, any>
+  data: Record<string, unknown>
 ): Array<{ key: string; value: { stringValue: string } }> {
   if (!data || typeof data !== 'object') {
     return []
@@ -80,19 +82,21 @@ function createSafeAttributes(
 /**
  * Forwards telemetry data to OpenTelemetry collector
  */
-async function forwardToCollector(data: any): Promise<boolean> {
+async function forwardToCollector(data: unknown): Promise<boolean> {
   if (!data || typeof data !== 'object') {
     logger.error('Invalid telemetry data format')
     return false
   }
+  
+  const telemetryData = data as Record<string, unknown>
 
-  const endpoint = env.TELEMETRY_ENDPOINT || 'https://telemetry.simstudio.ai/v1/traces'
+  const endpoint = env.TELEMETRY_ENDPOINT || 'https://telemetry.Setn.ai/v1/traces'
   const timeout = DEFAULT_TIMEOUT
 
   try {
     const timestamp = Date.now() * 1000000
 
-    const safeAttrs = createSafeAttributes(data)
+    const safeAttrs = createSafeAttributes(telemetryData)
 
     const serviceAttrs = [
       { key: 'service.name', value: { stringValue: 'sim-studio' } },
@@ -107,7 +111,9 @@ async function forwardToCollector(data: any): Promise<boolean> {
     ]
 
     const spanName =
-      data.category && data.action ? `${data.category}.${data.action}` : 'telemetry.event'
+      telemetryData.category && telemetryData.action 
+        ? `${telemetryData.category}.${telemetryData.action}` 
+        : 'telemetry.event'
 
     const payload = {
       resourceSpans: [

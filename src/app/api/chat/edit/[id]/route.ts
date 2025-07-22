@@ -73,7 +73,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
     const chatUrl = isDev
       ? `http://${chatInstance[0].subdomain}.${getBaseDomain()}`
-      : `https://${chatInstance[0].subdomain}.simstudio.ai`
+      : `https://${chatInstance[0].subdomain}.Setn.ai`
 
     const result = {
       ...safeData,
@@ -221,7 +221,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
       const chatUrl = isDev
         ? `http://${updatedSubdomain}.${getBaseDomain()}`
-        : `https://${updatedSubdomain}.simstudio.ai`
+        : `https://${updatedSubdomain}.Setn.ai`
 
       logger.info(`Chat "${chatId}" updated successfully`)
 

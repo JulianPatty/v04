@@ -10,7 +10,7 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
   description: 'Send messages to Slack',
   longDescription:
     "Comprehensive Slack integration with OAuth authentication. Send formatted messages using Slack's mrkdwn syntax or Block Kit.",
-  docsLink: 'https://docs.simstudio.ai/tools/slack',
+  docsLink: 'https://docs.Setn.ai/tools/slack',
   category: 'tools',
   bgColor: '#611f69',
   icon: SlackIcon,

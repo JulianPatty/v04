@@ -33,10 +33,15 @@ interface TemplateData {
   isStarred?: boolean
 }
 
+interface IconProps {
+  className?: string
+  size?: number | string
+}
+
 interface BlockItem {
   id: string
   name: string
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<IconProps>
   bgColor: string
   type: string
 }
@@ -44,7 +49,7 @@ interface BlockItem {
 interface ToolItem {
   id: string
   name: string
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<IconProps>
   bgColor: string
   type: string
 }
@@ -52,7 +57,7 @@ interface ToolItem {
 interface PageItem {
   id: string
   name: string
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<IconProps>
   href: string
   shortcut?: string
 }
@@ -60,7 +65,7 @@ interface PageItem {
 interface DocItem {
   id: string
   name: string
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<IconProps>
   href: string
   type: 'main' | 'block' | 'tool'
 }
@@ -178,7 +183,7 @@ export function SearchModal({
         id: 'docs',
         name: 'Docs',
         icon: BookOpen,
-        href: 'https://docs.simstudio.ai/',
+        href: 'https://docs.Setn.ai/',
       },
     ],
     [workspaceId]
@@ -628,7 +633,9 @@ export function SearchModal({
                 filteredPages.length === 0 &&
                 filteredDocs.length === 0 && (
                   <div className='ml-6 py-12 text-center'>
-                    <p className='text-muted-foreground'>No results found for "{searchQuery}"</p>
+                    <p className='text-muted-foreground'>
+                      No results found for &quot;{searchQuery}&quot;
+                    </p>
                   </div>
                 )}
             </div>

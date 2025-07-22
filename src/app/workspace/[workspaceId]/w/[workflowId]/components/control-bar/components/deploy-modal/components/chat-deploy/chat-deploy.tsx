@@ -54,7 +54,7 @@ interface ChatDeployProps {
 type AuthType = 'public' | 'password' | 'email'
 
 const getDomainSuffix = (() => {
-  const suffix = isDev ? `.${getBaseDomain()}` : '.simstudio.ai'
+  const suffix = isDev ? `.${getBaseDomain()}` : '.Setn.ai'
   return () => suffix
 })()
 
@@ -449,9 +449,11 @@ export function ChatDeploy({
 
       // Close modal after successful deletion
       onClose()
-    } catch (error: any) {
+    } catch (error) {
       logger.error('Failed to delete chat:', error)
-      setErrorMessage(error.message || 'An unexpected error occurred while deleting')
+      setErrorMessage(
+        error instanceof Error ? error.message : 'An unexpected error occurred while deleting'
+      )
     } finally {
       setIsDeleting(false)
       setShowDeleteConfirmation(false)
@@ -563,7 +565,7 @@ export function ChatDeploy({
 
     try {
       // Create request payload
-      const payload: any = {
+      const payload = {
         workflowId,
         subdomain: subdomain.trim(),
         title: title.trim(),
@@ -702,7 +704,7 @@ export function ChatDeploy({
       // Validate with Zod
       try {
         chatSchema.parse(payload)
-      } catch (validationError: any) {
+      } catch (validationError) {
         if (validationError instanceof z.ZodError) {
           const errorMessage = validationError.errors[0]?.message || 'Invalid form data'
           setErrorMessage(errorMessage)
@@ -741,9 +743,11 @@ export function ChatDeploy({
       } else {
         throw new Error('Response missing chatUrl')
       }
-    } catch (error: any) {
+    } catch (error) {
       logger.error(`Failed to ${existingChat ? 'update' : 'deploy'} chat:`, error)
-      setErrorMessage(error.message || 'An unexpected error occurred')
+      setErrorMessage(
+        error instanceof Error ? error.message : 'An unexpected error occurred'
+      )
       logger.error(`Failed to deploy chat: ${error.message}`, workflowId)
     } finally {
       setChatSubmitting(false)
@@ -827,12 +831,12 @@ export function ChatDeploy({
       const port = url.port || (baseDomain.includes(':') ? baseDomain.split(':')[1] : '3000')
       domainSuffix = `.${baseHost}:${port}`
     } else {
-      domainSuffix = '.simstudio.ai'
+      domainSuffix = '.Setn.ai'
     }
 
     const subdomainPart = isDevelopmentUrl
       ? hostname.split('.')[0]
-      : hostname.split('.simstudio.ai')[0]
+      : hostname.split('.Setn.ai')[0]
 
     // Success view - simplified with no buttons
     return (
@@ -1306,7 +1310,7 @@ export function ChatDeploy({
             <AlertDialogTitle>Delete Chat?</AlertDialogTitle>
             <AlertDialogDescription>
               This will permanently delete your chat deployment at{' '}
-              <span className='font-mono text-destructive'>{subdomain}.simstudio.ai</span>.
+              <span className='font-mono text-destructive'>{subdomain}.Setn.ai</span>.
               <p className='mt-2'>
                 All users will lose access immediately, and this action cannot be undone.
               </p>

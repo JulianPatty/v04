@@ -12,7 +12,7 @@ interface EmailFooterProps {
 }
 
 export const EmailFooter = ({
-  baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai',
+  baseUrl = env.NEXT_PUBLIC_APP_URL || 'https://Setn.ai',
   unsubscribe,
 }: EmailFooterProps) => {
   return (
@@ -65,7 +65,7 @@ export const EmailFooter = ({
                 <br />
                 If you have any questions, please contact us at{' '}
                 <a
-                  href='mailto:help@simstudio.ai'
+                  href='mailto:help@Setn.ai'
                   style={{
                     color: '#706a7b !important',
                     textDecoration: 'underline',
@@ -73,7 +73,7 @@ export const EmailFooter = ({
                     fontFamily: 'HelveticaNeue, Helvetica, Arial, sans-serif',
                   }}
                 >
-                  help@simstudio.ai
+                  help@Setn.ai
                 </a>
               </Text>
               <table cellPadding={0} cellSpacing={0} style={{ width: '100%', marginTop: '4px' }}>
@@ -117,7 +117,7 @@ export const EmailFooter = ({
                         href={
                           unsubscribe?.unsubscribeToken && unsubscribe?.email
                             ? `${baseUrl}/unsubscribe?token=${unsubscribe.unsubscribeToken}&email=${encodeURIComponent(unsubscribe.email)}`
-                            : `mailto:help@simstudio.ai?subject=Unsubscribe%20Request&body=Please%20unsubscribe%20me%20from%20all%20emails.`
+                            : `mailto:help@Setn.ai?subject=Unsubscribe%20Request&body=Please%20unsubscribe%20me%20from%20all%20emails.`
                         }
                         style={{
                           color: '#706a7b !important',

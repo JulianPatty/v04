@@ -66,7 +66,7 @@ export const setChatAuthCookie = (
     sameSite: 'lax',
     path: '/',
     // Using subdomain for the domain in production
-    domain: isDev ? undefined : '.simstudio.ai',
+    domain: isDev ? undefined : '.Setn.ai',
     maxAge: 60 * 60 * 24, // 24 hours
   })
 }
