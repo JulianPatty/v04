@@ -20,5 +20,6 @@
     },
     "[json]": {
         "editor.defaultFormatter": "biomejs.biome"
-    }
+    },
+    "liveServer.settings.port": 5501
 }

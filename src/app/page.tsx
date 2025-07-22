@@ -1,17 +1,18 @@
-import { ReactFlowProvider } from '@xyflow/react';
+import { createClient } from '@/utils/supabase/server'
+import { cookies } from 'next/headers'
 
-import SidebarLayout from '../components/layouts/sidebar-layout';
-import AppContextMenu from '../components/app-context-menu';
-import Workflow from '../components/workflow';
+export default async function Page() {
+  const cookieStore = await cookies()
+  const supabase = createClient(cookieStore)
 
-export default async function WorkflowBuilder() {
+  const { data: todos } = await supabase.from('todos').select()
+
   return (
-    <ReactFlowProvider>
-      <SidebarLayout>
-        <AppContextMenu>
-          <Workflow />
-        </AppContextMenu>
-      </SidebarLayout>
-    </ReactFlowProvider>
-  );
+    <ul>
+      {todos?.map((todo) => (
+        <li>{todo}</li>
+      ))}
+    </ul>
+  )
 }
+

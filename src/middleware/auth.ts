@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/utils/supabase/server'
 import { createLogger } from '@/lib/logs/console-logger' // Winston-based logger for consistent, structured logging
 import { nanoid } from 'nanoid' // Secure, URL-friendly unique ID generator
 
